@@ -37,7 +37,6 @@ public class EnderCompass extends Item {
 
     @Override
     public void inventoryTick(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
-        ServerWorld
         checkAndSetKey(stack, entityIn);
     }
 }

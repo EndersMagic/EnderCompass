@@ -31,7 +31,8 @@ public class FinalisedModelEnderCompass extends BakedModelDelegate {
     private final float nineteenDegs = (float) (Math.PI / 2);
 
     private static BlockPos getTarget() {
-        return target.get(mc().world.getProviderName());
+        String providerName = mc().world.dimension.getType().toString();
+        return target.get(providerName);
     }
 
     public static Map<String, BlockPos> target = new HashMap<String, BlockPos>() {
