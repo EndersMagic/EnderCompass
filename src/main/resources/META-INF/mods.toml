@@ -53,6 +53,6 @@ This is a long form description of the mod. You can write whatever you want here
 [[dependencies.endercompass]]
     modId="codechickenlib"
     mandatory=true
-    versionRange="[3.2.8.374,)"
+    versionRange="[3.3.0.373,)"
     ordering="AFTER"
     side="BOTH"
