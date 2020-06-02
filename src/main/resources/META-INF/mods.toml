@@ -50,3 +50,9 @@ This is a long form description of the mod. You can write whatever you want here
     versionRange="[1.14.4]"
     ordering="NONE"
     side="BOTH"
+[[dependencies.endercompass]]
+    modId="codechickenlib"
+    mandatory=true
+    versionRange="[3.2.8.374,)"
+    ordering="AFTER"
+    side="BOTH"

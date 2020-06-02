@@ -1,7 +1,6 @@
 package hohserg.endercompass;
 
-import hohserg.endercompass.network.ECPacketHandler;
-import hohserg.endercompass.network.PacketUpdateStrongholdPos;
+import hohserg.endercompass.network.NetworkHandler;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.server.ServerWorld;
@@ -21,8 +20,8 @@ public class ForgeEventSubscriber {
                 System.out.println("test1");
                 Optional.ofNullable(((ServerWorld) event.getWorld()).getChunkProvider().getChunkGenerator()
                         .findNearestStructure(event.getWorld(), "Stronghold", new BlockPos(event.getEntity()), 100, false))
-                        .map(pos -> new PacketUpdateStrongholdPos(event.getWorld().dimension.getType().toString(), pos))
-                        .ifPresent(p -> ECPacketHandler.sendTo(p, (ServerPlayerEntity) event.getEntity()));
+                        .map(pos -> NetworkHandler.packet(1).writeString(event.getWorld().dimension.getType().toString()).writePos(pos))
+                        .ifPresent(p -> p.sendToPlayer((ServerPlayerEntity) event.getEntity()));
             }
     }
 }

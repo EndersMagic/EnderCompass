@@ -1,7 +1,7 @@
 package hohserg.endercompass;
 
 
-import hohserg.endercompass.network.ECPacketHandler;
+import hohserg.endercompass.network.NetworkHandler;
 import net.minecraftforge.fml.common.Mod;
 
 import java.util.Random;
@@ -17,6 +17,6 @@ public class Main {
     public static final Random random = new Random();
 
     public Main() {
-        ECPacketHandler.register();
+        NetworkHandler.init();
     }
 }
