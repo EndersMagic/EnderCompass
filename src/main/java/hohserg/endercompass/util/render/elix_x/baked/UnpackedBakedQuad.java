@@ -2,13 +2,12 @@ package hohserg.endercompass.util.render.elix_x.baked;
 
 import hohserg.endercompass.util.render.elix_x.baked.vertex.DefaultUnpackedVertices;
 import hohserg.endercompass.util.render.elix_x.baked.vertex.PackedVertices;
-import hohserg.endercompass.util.render.elix_x.ecomms.reflection.ReflectionHelper.AClass;
-import hohserg.endercompass.util.render.elix_x.ecomms.reflection.ReflectionHelper.AField;
+import hohserg.endercompass.util.render.elix_x.ecomms.reflection.ReflectionHelper;
 import net.minecraft.client.renderer.model.BakedQuad;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.vertex.VertexFormat;
 import net.minecraft.util.Direction;
-import net.minecraftforge.client.model.pipeline.UnpackedBakedQuad.Builder;
+import net.minecraftforge.client.model.pipeline.BakedQuadBuilder;
 import org.lwjgl.opengl.GL11;
 
 public class UnpackedBakedQuad {
@@ -83,27 +82,36 @@ public class UnpackedBakedQuad {
     }
 
     public BakedQuad pack(VertexFormat format) {
-        return new net.minecraftforge.client.model.pipeline.UnpackedBakedQuad(vertices.pack(GL11.GL_QUADS, format).getData(), tintIndex, face, sprite, applyDiffuseLighting, format);
+        BakedQuadBuilder quadBuilder = new BakedQuadBuilder(sprite);
+        vertices.getVertices().forEach(v -> {
+            float[][] data = v.pack(format).getData();
+            for (int i = 0; i < data.length; i++)
+                quadBuilder.put(i, data[i]);
+
+        });
+        quadBuilder.setQuadTint(tintIndex);
+        quadBuilder.setApplyDiffuseLighting(applyDiffuseLighting);
+        quadBuilder.setQuadOrientation(face);
+        return quadBuilder.build();
     }
 
-    private static final AField<net.minecraftforge.client.model.pipeline.UnpackedBakedQuad, float[][][]> unpackedData = new AClass<>(net.minecraftforge.client.model.pipeline.UnpackedBakedQuad.class).<float[][][]>getDeclaredField("unpackedData").orElseThrow(() -> new IllegalArgumentException("Failed to reflect forge.UnpackedBakedQuad#unpackedData necessary for excore.UnpackedBakedQuad")).setAccessible(true);
+    private static final ReflectionHelper.AField<BakedQuadBuilder, float[][][]> unpackedData = new ReflectionHelper.AClass<>(BakedQuadBuilder.class).<float[][][]>getDeclaredField("unpackedData").orElseThrow(() -> new IllegalArgumentException("Failed to reflect forge.UnpackedBakedQuad#unpackedData necessary for excore.UnpackedBakedQuad")).setAccessible(true);
 
-    public static UnpackedBakedQuad unpack(net.minecraftforge.client.model.pipeline.UnpackedBakedQuad quad) {
-        return new UnpackedBakedQuad(unpackedData.get(quad).get(), quad.getFormat(), quad.getTintIndex(), quad.getFace(), quad.getSprite(), quad.shouldApplyDiffuseLighting());
+
+    public static UnpackedBakedQuad unpack(BakedQuadBuilder quad, BakedQuad bakedQuad) {
+        return new UnpackedBakedQuad(unpackedData.get(quad).get(), quad.getVertexFormat(), bakedQuad.getTintIndex(), bakedQuad.getFace(), bakedQuad.func_187508_a(), bakedQuad.shouldApplyDiffuseLighting());
     }
 
     //TODO: Move to functional models utils class once created.
     @Deprecated
-    public static net.minecraftforge.client.model.pipeline.UnpackedBakedQuad unpackForge(BakedQuad quad) {
-        if (quad instanceof net.minecraftforge.client.model.pipeline.UnpackedBakedQuad)
-            return (net.minecraftforge.client.model.pipeline.UnpackedBakedQuad) quad;
-        Builder builder = new Builder(quad.getFormat());
+    public static BakedQuadBuilder unpackForge(BakedQuad quad) {
+        BakedQuadBuilder builder = new BakedQuadBuilder(quad.func_187508_a());
         quad.pipe(builder);
-        return builder.build();
+        return builder;
     }
 
     public static UnpackedBakedQuad unpack(BakedQuad quad) {
-        return unpack(unpackForge(quad));
+        return unpack(unpackForge(quad), quad);
     }
 
 }

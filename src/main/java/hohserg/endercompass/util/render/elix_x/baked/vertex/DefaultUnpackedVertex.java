@@ -8,7 +8,6 @@ import net.minecraft.client.renderer.vertex.VertexFormatElement.Type;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.Vec3i;
 
-import javax.vecmath.Vector2f;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -49,7 +48,7 @@ public class DefaultUnpackedVertex {
     public DefaultUnpackedVertex(VertexFormat format, float[][] data) {
         elements:
         for (int i = 0; i < data.length; i++) {
-            VertexFormatElement element = format.getElement(i);
+            VertexFormatElement element = format.getElements().get(i);
             float[] edata = data[i];
             switch (element.getUsage()) {
                 case POSITION:
@@ -148,10 +147,10 @@ public class DefaultUnpackedVertex {
     }
 
     public PackedVertex pack(VertexFormat format) {
-        float[][] data = new float[format.getElementCount()][];
+        float[][] data = new float[format.getElements().size()][];
         elements:
         for (int i = 0; i < data.length; i++) {
-            VertexFormatElement element = format.getElement(i);
+            VertexFormatElement element = format.getElements().get(i);
             float[] edata = data[i] = new float[element.getElementCount()];
             switch (element.getUsage()) {
                 case POSITION:
