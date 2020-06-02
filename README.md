@@ -1,6 +1,6 @@
 # EnderCompass
 Simple Minecraft modwhich added pretty ender eye in glass flask
-![gif](https://i.gyazo.com/4b6bd887781d02497a946df817746d9d.gif)
+![](https://i.gyazo.com/4b6bd887781d02497a946df817746d9d.gif)
 
 ## How to build
 Clone to local
