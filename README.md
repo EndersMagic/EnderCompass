@@ -1,6 +1,6 @@
 # EnderCompass
 Simple Minecraft modwhich added pretty ender eye in glass flask
-![](https://github.com/EndersMagic/EnderCompass/raw/master/demo.gif)
+![](https://github.com/EndersMagic/EnderCompass/raw/master/demo/demo.gif)
 
 ## How to build
 
