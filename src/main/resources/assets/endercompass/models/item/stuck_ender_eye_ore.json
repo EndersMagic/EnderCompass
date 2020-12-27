@@ -1,0 +1,19 @@
+{
+  "parent": "block/block",
+  "textures": {
+    "ore": "endercompass:blocks/stuck_ender_eye_ore"
+  },
+  "elements": [
+    {   "from": [ 0, 0, 0 ],
+      "to": [ 16, 16, 16 ],
+      "faces": {
+        "down":  { "texture": "#ore", "cullface": "ore" },
+        "up":    { "texture": "#ore", "cullface": "ore" },
+        "north": { "texture": "#ore", "cullface": "ore" },
+        "south": { "texture": "#ore", "cullface": "ore" },
+        "west":  { "texture": "#ore", "cullface": "ore" },
+        "east":  { "texture": "#ore", "cullface": "ore" }
+      }
+    }
+  ]
+}

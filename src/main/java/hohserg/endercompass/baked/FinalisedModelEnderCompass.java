@@ -13,7 +13,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.vector.Vector3d;
 import net.minecraftforge.client.model.data.EmptyModelData;
 
 import javax.annotation.Nullable;
@@ -21,7 +21,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class FinalisedModelEnderCompass extends BakedModelDelegate {
-    private Vec3d current = new Vec3d(2, 0, 3);
+    private Vector3d current = new Vector3d(2, 0, 3);
     private float roll = 0;
     private int rollDirect = 1;
     private final float rollMin = (float) (-Math.PI / 16);
@@ -31,7 +31,7 @@ public class FinalisedModelEnderCompass extends BakedModelDelegate {
     private final float nineteenDegs = (float) (Math.PI / 2);
 
     private static BlockPos getTarget() {
-        String providerName = mc().world.dimension.getType().toString();
+        String providerName = mc().world.getDimensionKey().toString();
         return target.get(providerName);
     }
 
@@ -88,26 +88,26 @@ public class FinalisedModelEnderCompass extends BakedModelDelegate {
         return (float) (x < 0.5f ? Math.sqrt(x) : Math.sqrt(0.5));
     }
 
-    private double calcAngle(Vec3d pos1, BlockPos pos) {
+    private double calcAngle(Vector3d pos1, BlockPos pos) {
         return Math.atan2(pos1.x - pos.getX(), pos1.z - pos.getZ());
     }
 
-    private Vec3d getEyePos() {
-        Vec3d localTarget = getLocalTarget();
+    private Vector3d getEyePos() {
+        Vector3d localTarget = getLocalTarget();
         current = current.add(localTarget.subtract(current).scale(0.001));
         return current;
     }
 
-    private Vec3d getLocalTarget() {
+    private Vector3d getLocalTarget() {
         double angle = calcAngle(entity.getEyePosition(mc().getRenderPartialTicks()), getTarget()) + Math.toRadians(entity.rotationYaw + 90);
-        return new Vec3d(2 - Math.cos(angle), 0, 3 + Math.sin(angle));
+        return new Vector3d(2 - Math.cos(angle), 0, 3 + Math.sin(angle));
     }
 
     private static Minecraft mc() {
         return Minecraft.getInstance();
     }
 
-    private List<BakedQuad> generateEye(Vec3d eyePos, float roll) {
+    private List<BakedQuad> generateEye(Vector3d eyePos, float roll) {
         return getEyeQuads()
                 .stream()
                 .map(UnpackedBakedQuad::unpack)

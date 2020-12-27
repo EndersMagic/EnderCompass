@@ -4,12 +4,16 @@ import hohserg.endercompass.baked.ModelEnderCompass;
 import hohserg.endercompass.items.EnderCompass;
 import net.minecraft.client.renderer.model.IBakedModel;
 import net.minecraft.client.renderer.model.ModelResourceLocation;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.ModelBakeEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 import static hohserg.endercompass.items.EnderCompass.ender_compass;
 

@@ -2,6 +2,7 @@ package hohserg.endercompass.baked;
 
 import net.minecraft.client.renderer.model.IBakedModel;
 import net.minecraft.client.renderer.model.ItemOverrideList;
+import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
@@ -12,7 +13,7 @@ public class GenericItemOverrideList {
     public static ItemOverrideList fromLambda(HandleItemState handleItemState) {
         return new ItemOverrideList() {
             @Override
-            public IBakedModel getModelWithOverrides(IBakedModel originalModel, ItemStack stack, @Nullable World world, @Nullable LivingEntity entity) {
+            public IBakedModel getOverrideModel(IBakedModel originalModel, ItemStack stack, @Nullable ClientWorld world, @Nullable LivingEntity entity) {
                 return handleItemState.apply(originalModel, stack, world, entity);
             }
         };

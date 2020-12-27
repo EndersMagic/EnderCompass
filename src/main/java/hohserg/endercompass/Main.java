@@ -2,7 +2,10 @@ package hohserg.endercompass;
 
 
 import hohserg.endercompass.network.NetworkHandler;
+import hohserg.endercompass.worldgen.OreGeneration;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
 import java.util.Random;
 

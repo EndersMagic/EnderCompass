@@ -99,13 +99,13 @@ public class UnpackedBakedQuad {
 
 
     public static UnpackedBakedQuad unpack(BakedQuadBuilder quad, BakedQuad bakedQuad) {
-        return new UnpackedBakedQuad(unpackedData.get(quad).get(), quad.getVertexFormat(), bakedQuad.getTintIndex(), bakedQuad.getFace(), bakedQuad.func_187508_a(), bakedQuad.shouldApplyDiffuseLighting());
+        return new UnpackedBakedQuad(unpackedData.get(quad).get(), quad.getVertexFormat(), bakedQuad.getTintIndex(), bakedQuad.getFace(), bakedQuad.getSprite(), bakedQuad.applyDiffuseLighting());
     }
 
     //TODO: Move to functional models utils class once created.
     @Deprecated
     public static BakedQuadBuilder unpackForge(BakedQuad quad) {
-        BakedQuadBuilder builder = new BakedQuadBuilder(quad.func_187508_a());
+        BakedQuadBuilder builder = new BakedQuadBuilder(quad.getSprite());
         quad.pipe(builder);
         return builder;
     }

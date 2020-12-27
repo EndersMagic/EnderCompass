@@ -1,10 +1,16 @@
 package hohserg.endercompass.items;
 
+import hohserg.endercompass.ForgeEventSubscriber;
 import hohserg.endercompass.Main;
+import net.minecraft.command.impl.TeleportCommand;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.Hand;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.registries.ObjectHolder;
@@ -39,4 +45,17 @@ public class EnderCompass extends Item {
     public void inventoryTick(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
         checkAndSetKey(stack, entityIn);
     }
+    /*
+
+    @Override
+    public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
+        if (playerIn.isCreative() && !worldIn.isRemote) {
+            BlockPos strongholdPos = ForgeEventSubscriber.getStrongholdPos(worldIn, playerIn.getPosition(), ((ServerWorld) worldIn).getChunkProvider().getChunkGenerator());
+            if (strongholdPos != null)
+                ((ServerWorld) worldIn).getServer().getCommandManager().handleCommand(playerIn.getCommandSource(),"/tp @a "+strongholdPos.getX()+" "+strongholdPos.getY()+" "+strongholdPos.getZ());
+                //playerIn.setPositionAndUpdate(strongholdPos.getX(), strongholdPos.getY(), strongholdPos.getZ());
+                //playerIn.setPosition(strongholdPos.getX(), strongholdPos.getY(), strongholdPos.getZ());
+        }
+        return super.onItemRightClick(worldIn, playerIn, handIn);
+    }*/
 }

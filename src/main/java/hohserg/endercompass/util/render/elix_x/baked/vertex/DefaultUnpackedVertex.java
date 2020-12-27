@@ -5,8 +5,8 @@ import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.client.renderer.vertex.VertexFormat;
 import net.minecraft.client.renderer.vertex.VertexFormatElement;
 import net.minecraft.client.renderer.vertex.VertexFormatElement.Type;
-import net.minecraft.util.math.Vec3d;
-import net.minecraft.util.math.Vec3i;
+import net.minecraft.util.math.vector.Vector3d;
+import net.minecraft.util.math.vector.Vector3i;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -16,7 +16,7 @@ public class DefaultUnpackedVertex {
     /**
      * Unpacked version of {@linkplain DefaultVertexFormats#POSITION_3F}
      */
-    private Vec3d pos;
+    private Vector3d pos;
     /**
      * Unpacked version of {@linkplain DefaultVertexFormats#COLOR_4UB}
      */
@@ -27,17 +27,17 @@ public class DefaultUnpackedVertex {
     private Vector2f texture;
     /**
      * Unpacked version of {@linkplain DefaultVertexFormats#TEX_2S}<br><br>
-     * Note: Only {@linkplain Vec3i#x} and {@linkplain Vec3i#y} are used, and as valid shorts.
+     * Note: Only {@linkplain Vector3i#x} and {@linkplain Vector3i#y} are used, and as valid shorts.
      */
-    private Vec3i lightmap = new Vec3i(0, 0, 1);
+    private Vector3i lightmap = new Vector3i(0, 0, 1);
     /**
      * Unpacked version of {@linkplain DefaultVertexFormats#NORMAL_3B}<br><br>
-     * Note: All fields of {@linkplain Vec3i} are valid bytes.
+     * Note: All fields of {@linkplain Vector3i} are valid bytes.
      */
-    private Vec3i normal;
+    private Vector3i normal;
     private Map<VertexFormatElement, float[]> unknown = new HashMap<>();
 
-    public DefaultUnpackedVertex(Vec3d pos, RGBA color, Vector2f texture, Vec3i lightmap, Vec3i normal) {
+    public DefaultUnpackedVertex(Vector3d pos, RGBA color, Vector2f texture, Vector3i lightmap, Vector3i normal) {
         this.pos = pos;
         this.color = color;
         this.texture = texture;
@@ -53,7 +53,7 @@ public class DefaultUnpackedVertex {
             switch (element.getUsage()) {
                 case POSITION:
                     if (element.getType() == Type.FLOAT && element.getElementCount() == 3) {
-                        pos = new Vec3d(edata[0], edata[1], edata[2]);
+                        pos = new Vector3d(edata[0], edata[1], edata[2]);
                         continue elements;
                     } else break;
                 case COLOR:
@@ -66,12 +66,12 @@ public class DefaultUnpackedVertex {
                         texture = new Vector2f(edata[0], edata[1]);
                         continue elements;
                     } else if (element.getType() == Type.SHORT && element.getElementCount() == 2) {
-                        lightmap = new Vec3i((short) edata[0], (short) edata[1], 0);
+                        lightmap = new Vector3i((short) edata[0], (short) edata[1], 0);
                         continue elements;
                     } else break;
                 case NORMAL:
                     if (element.getType() == Type.BYTE && element.getElementCount() == 3) {
-                        normal = new Vec3i((byte) edata[0], (byte) edata[1], (byte) edata[2]);
+                        normal = new Vector3i((byte) edata[0], (byte) edata[1], (byte) edata[2]);
                         continue elements;
                     } else break;
                 case PADDING:
@@ -83,11 +83,11 @@ public class DefaultUnpackedVertex {
         }
     }
 
-    public Vec3d getPos() {
+    public Vector3d getPos() {
         return pos;
     }
 
-    public DefaultUnpackedVertex setPos(Vec3d pos) {
+    public DefaultUnpackedVertex setPos(Vector3d pos) {
         this.pos = pos;
         return this;
     }
@@ -110,20 +110,20 @@ public class DefaultUnpackedVertex {
         return this;
     }
 
-    public Vec3i getLightmap() {
+    public Vector3i getLightmap() {
         return lightmap;
     }
 
-    public DefaultUnpackedVertex setLightmap(Vec3i lightmap) {
+    public DefaultUnpackedVertex setLightmap(Vector3i lightmap) {
         this.lightmap = lightmap;
         return this;
     }
 
-    public Vec3i getNormal() {
+    public Vector3i getNormal() {
         return normal;
     }
 
-    public DefaultUnpackedVertex setNormal(Vec3i normal) {
+    public DefaultUnpackedVertex setNormal(Vector3i normal) {
         this.normal = normal;
         return this;
     }
