@@ -1,0 +1,6 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "endercompass:blocks/stuck_ender_eye_ore"
+  }
+}

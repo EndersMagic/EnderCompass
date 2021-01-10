@@ -3,6 +3,7 @@ package hohserg.endercompass.proxy;
 import hohserg.endercompass.client.render.model.baked.ModelEnderCompass;
 import net.minecraft.client.renderer.block.model.IBakedModel;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.item.Item;
 import net.minecraftforge.client.event.ModelBakeEvent;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.model.ModelLoader;
@@ -13,6 +14,7 @@ public class ClientProxy extends CommonProxy {
     @SubscribeEvent
     public void registerModels(ModelRegistryEvent e) {
         ModelLoader.setCustomModelResourceLocation(enderCompass, 0, new ModelResourceLocation(enderCompass.getRegistryName(), "inventory"));
+        ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(stuckEnderEyeOre), 0, new ModelResourceLocation(stuckEnderEyeOre.getRegistryName(), "inventory"));
     }
 
     @SubscribeEvent
