@@ -45,7 +45,6 @@ minecraft {
 dependencies {
     compile "io.gitlab.hohserg.elegant.networking:elegant-networking-1.12:2.4"
     compileOnly "io.gitlab.hohserg.elegant.networking:annotation-processor:2.8"
-    compile fileTree("./libs/")
     // you may put jars on which you depend on in ./libs
     // or you may define them like so..
     //compile "some.group:artifact:version:classifier"
