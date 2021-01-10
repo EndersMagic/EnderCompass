@@ -1,10 +1,10 @@
 {
   "variants": {
     "normal": {
-      "model": "endercompass:block/stuck_ender_eye_ore"
+      "model": "endercompass:stuck_ender_eye_ore"
     },
     "inventory": {
-      "model": "endercompass:block/stuck_ender_eye_ore"
+      "model": "endercompass:stuck_ender_eye_ore"
     }
   }
 }
