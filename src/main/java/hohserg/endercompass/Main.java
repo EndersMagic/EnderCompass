@@ -12,7 +12,7 @@ import static hohserg.endercompass.Main.*;
 @Mod(modid = ID, name = NAME, version = VERSION, dependencies = "required-after:codechickenlib")
 public class Main {
     public static final String ID = "endercompass";
-    public static final String VERSION = "1.0";
+    public static final String VERSION = "1.5.1";
     public static final String NAME = "Ender Compass";
     public static final String SERVER = "hohserg.endercompass.proxy.CommonProxy";
     public static final String CLIENT = "hohserg.endercompass.proxy.ClientProxy";
